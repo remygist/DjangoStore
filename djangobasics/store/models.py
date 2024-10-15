@@ -3,7 +3,7 @@ import datetime
 from django.db import models
 from django.utils import timezone
 
-class Articles(models.Model):
+class Article(models.Model):
     article_name = models.CharField(max_length=200)
     pub_date = models.DateTimeField("date published", default=timezone.now())
     def __str__(self):
