@@ -29,5 +29,4 @@ def article_create(request):
             return HttpResponse("Article name cannot be empty", status=400)
     return render(request, "store/create.html")
 
-def login(request):
-    return render(request, "store/login.html")
+
