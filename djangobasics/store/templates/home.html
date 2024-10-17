@@ -9,6 +9,7 @@ Hi {{ user.username }}!
     {%csrf_token%}
     <button type="submit">Log Out</button>
 </form>
+<a href="{% url 'store:index' %}">See the articles</a>
 
 {% else %}
 <p>You are not logged in</p>
