@@ -31,4 +31,9 @@ def article_create(request):
             return HttpResponse("Article name cannot be empty", status=400)
     return render(request, "store/create.html")
 
-
+def article_delete(request, article_id):
+    article = get_object_or_404(Article, pk=article_id)
+    if request.method == "POST":
+        article.delete()
+        return redirect("store:index")
+    return render(request, 'store/article_confirm_delete.html', {'article': article})
