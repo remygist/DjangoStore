@@ -1,6 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, render, redirect
 from django.views.decorators.csrf import csrf_protect
+from django.contrib.auth.decorators import login_required
 
 from .models import Article
 
@@ -17,6 +18,7 @@ def detail(request, article_id):
     return render(request, "store/detail.html", {"article": article})
 
 @csrf_protect
+@login_required
 def article_create(request):
     if request.method == "POST":
         article_name = request.POST.get("article_name")
