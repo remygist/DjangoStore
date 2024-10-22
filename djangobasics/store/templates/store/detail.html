@@ -1,6 +1,11 @@
 {% extends "base.html" %}
 {% block title %}Home{% endblock %}
 
+{% load static%}
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'store/detail.css' %}">
+{% endblock %}
+
 {% block content %}
 
     <h1>{{ article.article_name }}</h1>
