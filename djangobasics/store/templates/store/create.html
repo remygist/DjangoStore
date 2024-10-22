@@ -1,21 +1,25 @@
 <!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Create article</title>
-    </head>
-    <body>
-        {% if error %}<p>{{ error }}</p>{% endif %}
+{% extends "base.html" %}
+{% block title %}Home{% endblock %}
 
-        <form action="{% url 'store:article_create' %}" method="post">
-            {% csrf_token %}
-            <fieldset>
-                <input type="text" name="article_name" id="article_name" />
-                <label for="article_name">Article name:</label>
-                <br />
-            </fieldset>
-            <input type="submit" value="Submit" />
-        </form>
-    </body>
-</html>
+{% load static %}
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'store/create.css' %}">
+{% endblock %}
+
+{% block content %}
+    {% if error %}<p>{{ error }}</p>{% endif %}
+
+    <form action="{% url 'store:article_create' %}" method="post">
+        {% csrf_token %}
+        <fieldset>
+            <label for="article_name">Article name:</label>
+            <input type="text" name="article_name" id="article_name" />
+            <br />
+        </fieldset>
+        <input type="submit" value="Submit" />
+        <a href="{% url 'store:index' %}" style="text-decoration: none;">
+            <button type="button" style="cursor: pointer;">Cancel</button>
+        </a>
+    </form>
+{% endblock %}
