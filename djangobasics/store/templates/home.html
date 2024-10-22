@@ -1,19 +1,26 @@
 {% extends "base.html" %}
 
 {% block title %}Home{% endblock %}
+{% load static %}
+{% block styles %}
+<link rel="stylesheet" href="{% static 'store/home.css' %}">
+{% endblock %}
+
 
 {% block content %}
 {% if user.is_authenticated %}
-Hi {{ user.username }}!
+<h2>Hi {{ user.username }}!</h2>
+<div class="buttons">
 <form action="{% url 'logout' %}" method="post">
     {%csrf_token%}
     <button type="submit">Log Out</button>
 </form>
-<a href="{% url 'store:index' %}">See the articles</a>
+<button><a href="{% url 'store:index' %}">See the articles</a></button></div>
 
 {% else %}
-<p>You are not logged in</p>
-<a href="{% url 'login' %}">Log In</a><br>
-<a href="{% url 'signup' %}">Sign Up</a>
+<h2>You are not logged in</h2>
+<div class="buttons">
+<button><a href="{% url 'login' %}">Log In</a></button><br>
+<button><a href="{% url 'signup' %}">Sign Up</a></button></div>
 {% endif %}
 {% endblock %}
