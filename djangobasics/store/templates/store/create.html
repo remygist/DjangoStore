@@ -6,6 +6,10 @@
 		<title>Create article</title>
 	</head>
 	<body>
+		{% if error%}
+		<p>{{error}}</p>
+		{%endif%}
+
 		<form action="{% url 'store:article_create' %}" method="post">
 			{% csrf_token %}
 			<fieldset>
