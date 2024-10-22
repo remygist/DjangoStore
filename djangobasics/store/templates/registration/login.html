@@ -2,14 +2,21 @@
 
 {% block title %}Login{% endblock %}
 
+{% load static %}
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'store/login.css' %}">
+{% endblock %}
+
 {% block content %}
-  <h2>Login</h2>
-  <form method="post">
-    {% csrf_token %}
-    {{ form }}
-    <button type="submit">Log In</button>
-  </form>
-  <p>
-    <a href="{% url 'password_reset' %}">Forgot password?</a>
-  </p>
+<div class="container">
+    <h2>Login</h2>
+    <form method="post" class="login-form">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn login-btn">Log In</button>
+    </form>
+    <p class="forgot-password">
+        <a href="{% url 'password_reset' %}">Forgot password?</a>
+    </p>
+</div>
 {% endblock %}

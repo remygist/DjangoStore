@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 {% extends "base.html" %}
-{% block title %}Home{% endblock %}
+{% block title %}Add Article{% endblock %}
 
 {% load static %}
 {% block styles %}
@@ -8,18 +8,24 @@
 {% endblock %}
 
 {% block content %}
-    {% if error %}<p>{{ error }}</p>{% endif %}
+<div class="container">
+    <h1>Add a New Article</h1>
 
-    <form action="{% url 'store:article_create' %}" method="post">
+    {% if error %}
+        <p class="error-message">{{ error }}</p>
+    {% endif %}
+
+    <form action="{% url 'store:article_create' %}" method="post" class="article-form">
         {% csrf_token %}
         <fieldset>
-            <label for="article_name">Article name:</label>
-            <input type="text" name="article_name" id="article_name" />
-            <br />
+            <label for="article_name">Article Name:</label>
+            <input type="text" name="article_name" id="article_name" required />
         </fieldset>
-        <input type="submit" value="Submit" />
-        <a href="{% url 'store:index' %}" style="text-decoration: none;">
-            <button type="button" style="cursor: pointer;">Cancel</button>
-        </a>
+        
+        <div class="form-actions">
+            <input type="submit" value="Submit" class="btn submit-btn" />
+            <a href="{% url 'store:index' %}" class="btn cancel-btn">Cancel</a>
+        </div>
     </form>
+</div>
 {% endblock %}
