@@ -3,24 +3,28 @@
 
 {% load static %}
 {% block styles %}
-    <link rel="stylesheet" href="{% static 'store/home.css' %}">
+    <link rel="stylesheet" href="{% static 'store/index.css' %}">
 {% endblock %}
 
 {% block content %}
     <h1>Available articles</h1>
+    {% if user.is_authenticated %}
+        <button><a href="{% url 'store:article_create' %}">Add articles</a></button>
+    {% endif %}
     {% if latest_articles_list %}
-        <ul>
+    <div class="cardContainer">
             {% for article in latest_articles_list %}
-                <li>
-                    <a href="{% url 'store:article_detail' article.id %}">{{ article.article_name }}</a>
-                </li>
-            {% endfor %}
-        </ul>
+            
+                <div class="articleCard">
+                    <p>{{ article.article_name }}</p>
+                    <p><a href="{% url 'store:article_detail' article.id %}">See details ...</a></p>
+                </div>
+            
+            {% endfor %}</div>
+      
     {% else %}
         <p>No products are available.</p>
     {% endif %}
 
-    {% if user.is_authenticated %}
-        <a href="{% url 'store:article_create' %}">Add articles</a>
-    {% endif %}
+    
 {% endblock %}
