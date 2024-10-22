@@ -1,26 +1,33 @@
 {% extends "base.html" %}
-
 {% block title %}Home{% endblock %}
+
 {% load static %}
 {% block styles %}
-<link rel="stylesheet" href="{% static 'store/home.css' %}">
+    <link rel="stylesheet" href="{% static 'store/home.css' %}">
 {% endblock %}
 
-
 {% block content %}
-{% if user.is_authenticated %}
-<h2>Hi {{ user.username }}!</h2>
-<div class="buttons">
-<form action="{% url 'logout' %}" method="post">
-    {%csrf_token%}
-    <button type="submit">Log Out</button>
-</form>
-<button><a href="{% url 'store:index' %}">See the articles</a></button></div>
-
-{% else %}
-<h2>You are not logged in</h2>
-<div class="buttons">
-<button><a href="{% url 'login' %}">Log In</a></button><br>
-<button><a href="{% url 'signup' %}">Sign Up</a></button></div>
-{% endif %}
+    {% if user.is_authenticated %}
+        <h2>Hi {{ user.username }}!</h2>
+        <div class="buttons">
+            <form action="{% url 'logout' %}" method="post">
+                {% csrf_token %}
+                <button type="submit">Log Out</button>
+            </form>
+            <button>
+                <a href="{% url 'store:index' %}">See the articles</a>
+            </button>
+        </div>
+    {% else %}
+        <h2>You are not logged in</h2>
+        <div class="buttons">
+            <button>
+                <a href="{% url 'login' %}">Log In</a>
+            </button>
+            <br>
+            <button>
+                <a href="{% url 'signup' %}">Sign Up</a>
+            </button>
+        </div>
+    {% endif %}
 {% endblock %}

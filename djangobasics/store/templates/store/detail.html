@@ -1,13 +1,14 @@
-{% extends "base.html" %} 
-{% block title %}Home{% endblock %} 
-{% block content%}
+{% extends "base.html" %}
+{% block title %}Home{% endblock %}
 
-<h1>{{ article.article_name }}</h1>
-<p>Published date: {{article.pub_date}}</p>
+{% block content %}
 
-{% if user.is_authenticated %}
-<a href="{% url 'store:article_delete' article.id %}">Delete</a>
+    <h1>{{ article.article_name }}</h1>
+    <p>Published date: {{ article.pub_date }}</p>
 
-{% endif %}
+    {% if user.is_authenticated %}
+        <a href="{% url 'store:article_delete' article.id %}">Delete</a>
+
+    {% endif %}
 
 {% endblock %}
