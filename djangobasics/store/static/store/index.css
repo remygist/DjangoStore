@@ -25,10 +25,8 @@ button a{
 .articleCard h3, .articleCard p{
     margin: 0;
     padding: 0;
-
 }
 
 .articleCard a{
     margin-left: 20px;
-    text-decoration: none;
 }

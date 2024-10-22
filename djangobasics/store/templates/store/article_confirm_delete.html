@@ -2,7 +2,7 @@
 
 {% load static%}
 {% block styles %}
-    <link rel="stylesheet" href="{% static 'store/home.css' %}">
+    <link rel="stylesheet" href="{% static 'store/article_confirm_delete.css' %}">
 {% endblock %}
 {% block content %}
   <h2>Are you sure you want to delete the article "{{ article.article_name }}"?</h2>
@@ -10,5 +10,8 @@
   <form method="post">
     {% csrf_token %}
     <button type="submit">Yes, delete</button>
+    <a href="{% url 'store:index' %}">
+      <button type="button">No, cancel</button>
+  </a>
   </form>
 {% endblock %}

@@ -11,6 +11,7 @@
     {% if user.is_authenticated %}
         <button><a href="{% url 'store:article_create' %}">Add articles</a></button>
     {% endif %}
+    <button><a href="{% url 'home' %}">Go to homepage</a></button>
     {% if latest_articles_list %}
     <div class="cardContainer">
             {% for article in latest_articles_list %}

@@ -37,7 +37,7 @@ def article_create(request):
     return render(request, "store/create.html")
 
 
-
+@login_required
 def article_delete(request, article_id):
     article = get_object_or_404(Article, pk=article_id)
     if request.method == "POST":
