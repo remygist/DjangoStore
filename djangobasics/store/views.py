@@ -2,6 +2,7 @@ from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, render, redirect
 from django.views.decorators.csrf import csrf_protect
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import AnonymousUser
 
 from .models import Article,CartItem
 
@@ -33,10 +34,15 @@ def article_delete(request, article_id):
         return redirect("store:index")
     return render(request, 'store/article_confirm_delete.html', {'article': article})
 
-def index(request, article_id=None):  
+def index(request):  
     latest_articles_list = Article.objects.order_by("-pub_date")
-    cart_items = CartItem.objects.filter(user=request.user)
-    total_price = sum(item.article.price * item.quantity for item in cart_items)
+
+    if request.user.is_authenticated:
+        cart_items = CartItem.objects.filter(user=request.user)
+        total_price = sum(item.article.price * item.quantity for item in cart_items)
+    else:
+        cart_items = []
+        total_price = 0
 
     context = {
         "latest_articles_list": latest_articles_list,
