@@ -2,5 +2,8 @@ from django.contrib import admin
 
 from .models import Article, CartItem
 
-admin.site.register(Article)
+class ArticleAdmin(admin.ModelAdmin):
+    readonly_fields = ("id",)
+
+admin.site.register(Article, ArticleAdmin)
 admin.site.register(CartItem)

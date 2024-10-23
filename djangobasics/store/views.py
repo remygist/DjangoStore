@@ -55,5 +55,9 @@ def add_to_cart(request, article_id):
 
 def remove_from_cart(request, item_id):
     cart_item = CartItem.objects.get(id=item_id)
-    cart_item.delete()
-    return redirect('store:view_cart')
+    if cart_item.quantity > 1:
+        cart_item.quantity -= 1
+        cart_item.save()
+    else:
+        cart_item.delete()
+    return redirect('store:index')
