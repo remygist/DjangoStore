@@ -64,19 +64,18 @@
                 </form>
             </div>
         </div>
-    
+    </div>
 
     <script>
-        document.getElementById("editBtn").addEventListener("click", function() {
+    document.getElementById("editBtn").addEventListener("click", function() {
+        document.getElementById("descriptionInput").style.display = "inline";
+        document.getElementById("priceInput").style.display = "inline";
 
-            document.getElementById("descriptionInput").style.display = "inline";
-            document.getElementById("priceInput").style.display = "inline";
+        document.getElementById("descriptionText").style.display = "none";
+        document.getElementById("priceText").style.display = "none";
 
-            document.getElementById("descriptionText").style.display = "none";
-            document.getElementById("priceText").style.display = "none";
-            
-            document.getElementById("saveBtn").style.display = "inline";
-            this.style.display = "none";
-        });
+        document.getElementById("saveBtn").style.display = "inline";
+        this.style.display = "none";
+    });
     </script>
 {% endblock %}
