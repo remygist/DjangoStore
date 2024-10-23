@@ -11,19 +11,73 @@
         <h1>{{ article.article_name }}</h1>
 
         <div class="article-details">
-            <img src="{{ article.image.url }}" alt="{{ article.article_name }}" class="article-image">
+            <img src="{{ article.image.url }}"
+                 alt="{{ article.article_name }}"
+                 class="article-image">
             <div class="article-info">
-                <p><strong>Description:</strong> <br>{{ article.description }}</p>
-                <p><strong>Price:</strong> €{{ article.price }}</p>
-                <p><strong>Published Date:</strong> {{ article.pub_date }}</p>
-                
-                <div class="action-buttons">
-                    <a href="{% url 'store:index' %}" class="btn">Go Back</a>
-                    {% if user.is_authenticated %}
-                        <a href="{% url 'store:article_delete' article.id %}" class="btn delete-btn">Delete</a>
-                    {% endif %}
-                </div>
+                <form id="editForm"
+                      action="{% url 'store:article_update' article.id %}"
+                      method="post">
+                    {% csrf_token %}
+                    <div>
+                        <p>
+                            <strong>Description:</strong>
+                            <br>
+                            <span id="descriptionText">{{ article.description }}</span>
+                            <input type="text"
+                                   name="description"
+                                   id="descriptionInput"
+                                   value="{{ article.description }}"
+                                   style="display: none">
+                        </p>
+                    </div>
+                    <div>
+                        <p>
+                            <strong>Price:</strong>
+                            <span id="priceText">€{{ article.price }}</span>
+                            <input type="number"
+                                   name="price"
+                                   id="priceInput"
+                                   min="0"
+                                   step="0.01"
+                                   value="{{ article.price }}"
+                                   style="display: none">
+                        </p>
+                    </div>
+                    <div>
+                        <p>
+                            <strong>Published Date:</strong> {{ article.pub_date }}
+                        </p>
+                    </div>
+
+                    <div class="action-buttons">
+                        <a href="{% url 'store:index' %}" class="btn">Go Back</a>
+                        {% if user.is_superuser %}
+                            <button type="button" class="btn edit-btn" id="editBtn">Edit</button>
+                            <button type="submit"
+                                    class="btn save-btn"
+                                    id="saveBtn"
+                                    style="display: none">Save</button>
+                            <a href="{% url 'store:article_delete' article.id %}"
+                               class="btn delete-btn">Delete</a>
+                        {% endif %}
+                    </div>
+                </form>
             </div>
         </div>
     </div>
+
+    <script>
+        document.getElementById("editBtn").addEventListener("click", function() {
+
+            document.getElementById("descriptionInput").style.display = "inline";
+            document.getElementById("priceInput").style.display = "inline";
+
+            document.getElementById("descriptionText").style.display = "none";
+            document.getElementById("priceText").style.display = "none";
+            
+            document.getElementById("saveBtn").style.display = "inline";
+            this.style.display = "none";
+        });
+    </script>
 {% endblock %}
