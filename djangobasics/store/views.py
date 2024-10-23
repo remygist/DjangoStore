@@ -67,3 +67,13 @@ def remove_from_cart(request, item_id):
     else:
         cart_item.delete()
     return redirect('store:index')
+
+def article_update(request, article_id):
+    article = get_object_or_404(Article, id=article_id)
+
+    if request.method == "POST":
+        article.description = request.POST['description']
+        article.price = request.POST['price']
+        article.save()
+        return redirect('store:article_detail', article_id=article_id)
+    return render(request, 'store/detail.html', {'article': article})
