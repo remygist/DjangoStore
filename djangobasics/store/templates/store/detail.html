@@ -8,12 +8,70 @@
 
 {% block content %}
 
+<<<<<<< Updated upstream
     <h1>{{ article.article_name }}</h1>
     <p>Published date: {{ article.pub_date }}</p>
 
     <button><a href="{% url 'store:index' %}">Go back</a></button>
     {% if user.is_authenticated %}
     <button><a href="{% url 'store:article_delete' article.id %}">Delete</a></button>
+=======
+        <div class="article-details">
+            {% if article.image %}
+                <img src="{{ article.image.url }}"
+                     alt="{{ article.article_name }}"
+                     class="article-image">
+            {% endif %}
+            <div class="article-info">
+                <form id="editForm"
+                      action="{% url 'store:article_update' article.id %}"
+                      method="post">
+                    {% csrf_token %}
+                    <div>
+                        <p>
+                            <strong>Description:</strong>
+                            <br>
+                            <span id="descriptionText">{{ article.description }}</span>
+                            <input type="text"
+                                   name="description"
+                                   id="descriptionInput"
+                                   value="{{ article.description }}"
+                                   style="display: none">
+                        </p>
+                    </div>
+                    <div>
+                        <p>
+                            <strong>Price:</strong>
+                            <span id="priceText">€{{ article.price }}</span>
+                            <input type="number"
+                                   name="price"
+                                   id="priceInput"
+                                   min="0"
+                                   step="0.01"
+                                   value="{{ article.price }}"
+                                   style="display: none">
+                        </p>
+                    </div>
+                    <div>
+                        <p>
+                            <strong>Published Date:</strong> {{ article.pub_date }}
+                        </p>
+                    </div>
+
+                    <div class="action-buttons">
+                        <a href="{% url 'store:index' %}" class="btn">Go Back</a>
+                        {% if user.is_superuser %}
+                            <button type="button" class="btn edit-btn" id="editBtn">Edit</button>
+                            <button type="submit" class="btn save-btn" id="saveBtn" style="display: none">Save</button>
+                            <a href="{% url 'store:article_delete' article.id %}"
+                               class="btn delete-btn">Delete</a>
+                        {% endif %}
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+>>>>>>> Stashed changes
 
     {% endif %}
 

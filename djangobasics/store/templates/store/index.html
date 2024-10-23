@@ -10,7 +10,46 @@
 <div class="container">
     <h1>Available Articles</h1>
 
+<<<<<<< Updated upstream
     <div class="actions">
+=======
+            <div class="actions">
+                {% if user.is_authenticated %}
+                    <a href="{% url 'store:article_create' %}" class="btn add-btn">Add Article</a>
+                {% endif %}
+                <a href="{% url 'home' %}" class="btn">Go to Homepage</a>
+            </div>
+
+            {% if latest_articles_list %}
+                <div class="cardContainer">
+                    {% for article in latest_articles_list %}
+                        <div class="articleCard">
+                            {% if article.image %}
+                                <img src="{{ article.image.url }}"
+                                    alt="{{ article.article_name }}"
+                                    class="article-image">
+                            {%endif%}
+                            <h2>{{ article.article_name }}</h2>
+                            <p class="description">{{ article.description }}</p>
+                            <p class="price">Price: €{{ article.price }}</p>
+                            
+                            <div class="buttons">
+                                <a href="{% url 'store:article_detail' article.id %}"
+                                   class="btn details-btn">See Details</a>
+                                   {% if user.is_authenticated %}
+                                <a href="{% url 'store:add_to_cart' article.id %}"
+                                   class="btn buy-now-btn">Add to cart</a>
+                                   {% endif %}
+                            </div>
+                            
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <p>No articles are available.</p>
+            {% endif %}
+        </div>
+>>>>>>> Stashed changes
         {% if user.is_authenticated %}
             <a href="{% url 'store:article_create' %}" class="btn add-btn">Add Article</a>
         {% endif %}
