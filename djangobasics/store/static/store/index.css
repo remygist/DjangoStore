@@ -17,7 +17,14 @@ body {
     max-width: 800px;
     width: 100%;
     text-align: center;
+    display: flex;
 }
+
+.articlesContainer{
+    display: flex;
+    flex-direction: column;
+}
+
 
 h1 {
     color: #333;
@@ -94,4 +101,9 @@ h1 {
 
 .details-btn:hover {
     background-color: #2980b9;
+}
+
+.cartContainer{
+    display: flex;
+    flex-direction: column;
 }
