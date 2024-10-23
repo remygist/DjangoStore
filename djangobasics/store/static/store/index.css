@@ -86,8 +86,8 @@ h1 {
 }
 
 .article-image {
-    width: 100%;
-    height: auto;
+    width: auto;
+    height: 150px;
     border-radius: 8px;
 }
 
