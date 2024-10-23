@@ -10,9 +10,6 @@
 <div class="container">
     <h1>Available Articles</h1>
 
-<<<<<<< Updated upstream
-    <div class="actions">
-=======
             <div class="actions">
                 {% if user.is_authenticated %}
                     <a href="{% url 'store:article_create' %}" class="btn add-btn">Add Article</a>
@@ -49,12 +46,11 @@
                 <p>No articles are available.</p>
             {% endif %}
         </div>
->>>>>>> Stashed changes
         {% if user.is_authenticated %}
             <a href="{% url 'store:article_create' %}" class="btn add-btn">Add Article</a>
         {% endif %}
         <a href="{% url 'home' %}" class="btn">Go to Homepage</a>
-    </div>
+    
 
     {% if latest_articles_list %}
         <div class="cardContainer">
@@ -68,5 +64,5 @@
     {% else %}
         <p>No articles are available.</p>
     {% endif %}
-</div>
+
 {% endblock %}
