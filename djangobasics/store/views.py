@@ -16,10 +16,12 @@ def detail(request, article_id):
 def article_create(request):
     if request.method == "POST":
         article_name = request.POST.get("article_name")
+        description = request.POST.get("description")
+        price = request.POST.get("price")
         if Article.objects.filter(article_name=article_name).exists():
             return render(request, "store/create.html", {"error":"This article already exists."})
         elif article_name:
-            new_article = Article(article_name=article_name)
+            new_article = Article(article_name=article_name, description=description, price=price)
             new_article.save()
             return redirect("store:index")
         else:

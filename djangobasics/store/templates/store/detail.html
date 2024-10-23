@@ -11,9 +11,11 @@
         <h1>{{ article.article_name }}</h1>
 
         <div class="article-details">
-            <img src="{{ article.image.url }}"
-                 alt="{{ article.article_name }}"
-                 class="article-image">
+            {% if article.image %}
+                <img src="{{ article.image.url }}"
+                     alt="{{ article.article_name }}"
+                     class="article-image">
+            {% endif %}
             <div class="article-info">
                 <form id="editForm"
                       action="{% url 'store:article_update' article.id %}"
@@ -54,10 +56,7 @@
                         <a href="{% url 'store:index' %}" class="btn">Go Back</a>
                         {% if user.is_superuser %}
                             <button type="button" class="btn edit-btn" id="editBtn">Edit</button>
-                            <button type="submit"
-                                    class="btn save-btn"
-                                    id="saveBtn"
-                                    style="display: none">Save</button>
+                            <button type="submit" class="btn save-btn" id="saveBtn" style="display: none">Save</button>
                             <a href="{% url 'store:article_delete' article.id %}"
                                class="btn delete-btn">Delete</a>
                         {% endif %}
@@ -65,7 +64,7 @@
                 </form>
             </div>
         </div>
-    </div>
+    
 
     <script>
         document.getElementById("editBtn").addEventListener("click", function() {

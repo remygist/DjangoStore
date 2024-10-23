@@ -1,17 +1,22 @@
 {% extends "base.html" %}
 
-{% load static%}
+{% load static %}
 {% block styles %}
     <link rel="stylesheet" href="{% static 'store/article_confirm_delete.css' %}">
 {% endblock %}
-{% block content %}
-  <h2>Are you sure you want to delete the article "{{ article.article_name }}"?</h2>
 
-  <form method="post">
-    {% csrf_token %}
-    <button type="submit">Yes, delete</button>
-    <a href="{% url 'store:index' %}">
-      <button type="button">No, cancel</button>
-  </a>
-  </form>
+{% block content %}
+    <div class="confirmation-container">
+        <h2>Are you sure you want to delete the article "{{ article.article_name }}"?</h2>
+
+        <form method="post">
+            {% csrf_token %}
+            <div class="button-group">
+                <button type="submit" class="btn delete-btn">Yes, delete</button>
+                <a href="{% url 'store:index' %}" class="btn cancel-btn">
+                    No, cancel
+                </a>
+            </div>
+        </form>
+    </div>
 {% endblock %}
