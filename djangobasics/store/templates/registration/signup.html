@@ -2,6 +2,11 @@
 
 {% block title %}Sign Up{% endblock %}
 
+{% load static %}
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'store/signup.css' %}">
+{% endblock %}
+
 {% block content %}
   <h2>Sign up</h2>
   <form method="post">
