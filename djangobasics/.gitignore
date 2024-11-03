@@ -1,0 +1,28 @@
+# Python-related
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+*.env
+
+# Virtual environment
+venv/
+env/
+
+# Django-specific
+db.sqlite3
+*.log
+media/
+staticfiles/
+
+# IDEs and editors
+.vscode/
+.idea/
+*.swp
+
+# Operating system files
+.DS_Store
+Thumbs.db
+
+# Other
+*.bak
